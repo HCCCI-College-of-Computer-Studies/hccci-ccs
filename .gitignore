@@ -1,0 +1,10 @@
+# Extracted PPTX working folder
+_pptx_extract/
+
+# Source presentation (large binary, not needed on the web)
+CCS-PRESENTATION.pptx
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

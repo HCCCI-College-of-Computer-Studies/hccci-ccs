@@ -627,10 +627,10 @@
         </div>
         <div class="form-grid">
           <div class="field-group col-4"><label class="field-label" for="studentType">Type of Student <em>*</em></label><select class="input-ctrl" id="studentType" name="studentType" required><option value="">Select type</option><option>New Student</option><option>Old Student</option><option>Transferee</option><option>Returnee</option></select></div>
-          <div class="field-group col-4"><label class="field-label" for="classification">Classification <em>*</em></label><select class="input-ctrl" id="classification" name="classification" required><option value="">Select classification</option><option>College</option><option>Senior High School</option><option>Technical-Vocational</option></select></div>
+          <div class="field-group col-4"><label class="field-label" for="classification">Classification <em>*</em></label><input class="input-ctrl" id="classification" name="classification" value="College" readonly required /></div>
           <div class="field-group col-4"><label class="field-label" for="department">Department <em>*</em></label><input class="input-ctrl" id="department" name="department" value="College of Computer Studies" required /></div>
-          <div class="field-group col-6"><label class="field-label" for="courseTrack">Course / Track <em>*</em></label><select class="input-ctrl" id="courseTrack" name="courseTrack" required><option value="">Select course or track</option><option>BSIT - Bachelor of Science in Information Technology</option><option>BSIS - Bachelor of Science in Information Systems</option><option>BSCS - Bachelor of Science in Computer Science</option><option>ACT - Associate in Computer Technology</option><option>ICT - Senior High School Track</option></select></div>
-          <div class="field-group col-3"><label class="field-label" for="yearLevel">Year Level <em>*</em></label><select class="input-ctrl" id="yearLevel" name="yearLevel" required><option value="">Select year</option><option>Grade 11</option><option>Grade 12</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div>
+          <div class="field-group col-6"><label class="field-label" for="courseTrack">Course <em>*</em></label><select class="input-ctrl" id="courseTrack" name="courseTrack" required><option value="">Select course</option><option>BSIT - Bachelor of Science in Information Technology</option><option>BSIS - Bachelor of Science in Information Systems</option><option>BSCS - Bachelor of Science in Computer Science</option><option>ACT - Associate in Computer Technology</option></select></div>
+          <div class="field-group col-3"><label class="field-label" for="yearLevel">Year Level <em>*</em></label><select class="input-ctrl" id="yearLevel" name="yearLevel" required><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div>
           <div class="field-group col-3"><label class="field-label" for="gender">Gender <em>*</em></label><select class="input-ctrl" id="gender" name="gender" required><option value="">Select gender</option><option>Male</option><option>Female</option></select></div>
           <div class="field-group col-3"><label class="field-label" for="firstName">First Name <em>*</em></label><input class="input-ctrl" id="firstName" name="firstName" autocomplete="given-name" required /></div>
           <div class="field-group col-3"><label class="field-label" for="middleName">Middle Name</label><input class="input-ctrl" id="middleName" name="middleName" autocomplete="additional-name" /></div>
@@ -908,6 +908,15 @@
       document.getElementById('fourPsNumber').required = is4Ps;
     }
 
+    function enforceCollegeOnly() {
+      const allowedCourses = [...document.getElementById('courseTrack').options].map(option => option.value);
+      const allowedYears = [...document.getElementById('yearLevel').options].map(option => option.value);
+      document.getElementById('classification').value = 'College';
+      document.getElementById('department').value = 'College of Computer Studies';
+      if (!allowedCourses.includes(document.getElementById('courseTrack').value)) document.getElementById('courseTrack').value = '';
+      if (!allowedYears.includes(document.getElementById('yearLevel').value)) document.getElementById('yearLevel').value = '';
+    }
+
     function collectDraftData() {
       const data = {};
       [...form.elements].forEach(el => {
@@ -941,6 +950,7 @@
           }
         });
         currentStep = Number.isInteger(data.currentStep) ? Math.min(Math.max(data.currentStep, 0), steps.length - 1) : 0;
+        enforceCollegeOnly();
         calculateAge();
         updateConditionalFields();
         showToast('Saved draft restored.');
@@ -1039,6 +1049,7 @@
     });
 
     restoreDraft();
+    enforceCollegeOnly();
     updateConditionalFields();
     renderWizard();
   </script>

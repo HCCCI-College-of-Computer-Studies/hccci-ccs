@@ -1044,16 +1044,31 @@
       gap: 1rem;
     }
     .ci-tag {
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--fire);
       background: rgba(249,115,22,0.08);
-      border: 1px solid rgba(249,115,22,0.2);
-      padding: 0.35rem 0.55rem;
-      white-space: nowrap;
+      border: 1px solid rgba(249,115,22,0.22);
+      border-radius: 0.5rem;
       margin-top: 2px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-item:hover .ci-tag {
+      background: rgba(249,115,22,0.16);
+      border-color: rgba(249,115,22,0.45);
+    }
+    .ci-tag svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .ci-label {
       font-family: var(--font-mono);
@@ -1339,7 +1354,7 @@
 
       <div class="hero-actions">
         <a href="#programs" class="btn btn-fire">Explore Programs</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfO5kONjrxqpNA9PHeZrDqw59w3WxBpvFQLNpiGpjiO5KcsZw/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-enroll">Pre-Enroll Now</a>
+        <a href="enroll.html" target="_blank" rel="noopener noreferrer" class="btn btn-enroll">Pre-Enroll Now</a>
         <a href="#contact"  class="btn btn-ghost">Get in Touch</a>
       </div>
     </div>
@@ -1791,32 +1806,40 @@
           <h2 class="contact-headline reveal">
             Start your journey in<br><em>Computer Studies.</em>
           </h2>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfO5kONjrxqpNA9PHeZrDqw59w3WxBpvFQLNpiGpjiO5KcsZw/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-fire reveal" style="margin-bottom:2.5rem;display:inline-flex;">Pre-Enroll Now &rarr;</a>
+          <a href="enroll.html" target="_blank" rel="noopener noreferrer" class="btn btn-fire reveal" style="margin-bottom:2.5rem;display:inline-flex;">Pre-Enroll Now &rarr;</a>
 
           <ul class="contact-items" aria-label="Contact information">
             <li class="contact-item reveal">
-              <span class="ci-tag">Web</span>
+              <span class="ci-tag" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
               <div>
                 <div class="ci-label">Website</div>
                 <div class="ci-value"><a href="https://www.hccci.edu.ph" target="_blank" rel="noopener noreferrer">www.hccci.edu.ph</a></div>
               </div>
             </li>
             <li class="contact-item reveal d1">
-              <span class="ci-tag">@</span>
+              <span class="ci-tag" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+              </span>
               <div>
                 <div class="ci-label">Email</div>
                 <div class="ci-value"><a href="mailto:computerstudiesdept@hccci.edu.ph">computerstudiesdept@hccci.edu.ph</a></div>
               </div>
             </li>
             <li class="contact-item reveal d2">
-              <span class="ci-tag">Tel</span>
+              <span class="ci-tag" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 5.36 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
               <div>
                 <div class="ci-label">Phone</div>
                 <div class="ci-value"><a href="tel:+639263214383">+63926 321 4383</a></div>
               </div>
             </li>
             <li class="contact-item reveal d3">
-              <span class="ci-tag">Loc</span>
+              <span class="ci-tag" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
               <div>
                 <div class="ci-label">Address</div>
                 <div class="ci-value">Allah Valley Drive, Surallah, South Cotabato</div>

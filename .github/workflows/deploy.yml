@@ -1,0 +1,29 @@
+name: Build and Deploy Enrollment Portal
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  inject-secrets-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Inject Google Apps Script URL Secret
+        env:
+          SECRET_URL: ${{ secrets.APPS_SCRIPT_URL }}
+        run: |
+          echo "Injecting operational environment endpoint variables safely..."
+          sed -i "s|%%APPS_SCRIPT_URL_PLACEHOLDER%%|${SECRET_URL}|g" enroll.html
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
+          branch: gh-pages

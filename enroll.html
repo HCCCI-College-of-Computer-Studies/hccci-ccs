@@ -1023,6 +1023,7 @@
       progressFill.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
       prevBtn.disabled = currentStep === 0;
       nextBtn.hidden = currentStep === steps.length - 1;
+      saveDraftBtn.hidden = currentStep === steps.length - 1;
       submitBtn.hidden = currentStep !== steps.length - 1;
       if (currentStep === steps.length - 1) renderReview();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1106,7 +1107,7 @@
       if (!validateStep(currentStep)) return;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting Applications...';
+      submitBtn.textContent = 'Submitting Enrollment...';
       showToast('Processing attachments, please wait...');
 
       try {

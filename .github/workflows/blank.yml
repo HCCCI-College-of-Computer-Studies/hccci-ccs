@@ -1,0 +1,33 @@
+name: Build and Deploy Enrollment Portal
+
+on:
+  push:
+    branches:
+      - master  # Triggers the pipeline when pushing to your production branch
+
+permissions:
+  contents: write # Allows the workflow to publish or write assets if deploying to GitHub Pages
+
+jobs:
+  inject-secrets-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Inject Google Apps Script URL Secret
+        env:
+          # Pulls the secret you created in your organization/repository settings
+          SECRET_URL: ${{ secrets.APPS_SCRIPT_URL }}
+        run: |
+          echo "Injecting operational environment endpoint variables safely..."
+          # Uses stream editor (sed) to find the placeholder and swap it with your encrypted variable
+          sed -i "s|%%APPS_SCRIPT_URL_PLACEHOLDER%%|${SECRET_URL}|g" enroll.html
+
+      # OPTIONAL DEPLOYMENT STEP EXAMPLE
+      # If you are hosting the front-end directly via GitHub Pages, you can use a deployment step here:
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: . # Deploys root content containing your newly updated enroll.html file
+          branch: gh-pages # The target branch your static web server monitors
